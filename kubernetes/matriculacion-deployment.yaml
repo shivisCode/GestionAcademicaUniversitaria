@@ -28,6 +28,8 @@ spec:
               value: "admin123"
             - name: MATERIA_SERVICE_URL
               value: "http://materia-service:8082"
+            - name: COMPROBANTE_SERVICE_URL
+              value: "http://comprobante-service:8084"
 ---
 apiVersion: v1
 kind: Service
