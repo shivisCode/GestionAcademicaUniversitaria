@@ -65,6 +65,8 @@ public class MateriaServicio {
         materia.setCodigo(dto.getCodigo());
         materia.setCreditos(dto.getCreditos());
         materia.setEstado(dto.getEstado());
+        materia.setCupoTotal(dto.getCupoTotal());
+        materia.setCupoDisponible(dto.getCupoDisponible());
         
         Materia materiaActualizada = materiaRepositorio.save(materia);
 

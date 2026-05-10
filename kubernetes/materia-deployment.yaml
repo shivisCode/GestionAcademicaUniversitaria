@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: materia-service
-          image: TU_USUARIO/materia-service:latest
+          image: emherrerat/materia-service:latest
           ports:
             - containerPort: 8082
           env:

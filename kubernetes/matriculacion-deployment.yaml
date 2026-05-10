@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: matriculacion-service
-          image: TU_USUARIO/matriculacion-service:latest
+          image: emherrerat/matriculacion-service:latest
           ports:
             - containerPort: 8083
           env:

@@ -1,0 +1,4 @@
+verificamos si esta corriendo alguna otra app
+netstat -ano | findstr :8081
+matamos el proceso 
+taskkill /PID 23688 /F

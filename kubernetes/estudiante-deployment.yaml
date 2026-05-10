@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
         - name: estudiante-service
-          image: TU_USUARIO/estudiante-service:latest
+          image: emherrerat/estudiante-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8081
           env:
