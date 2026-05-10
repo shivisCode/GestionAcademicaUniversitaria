@@ -5,7 +5,6 @@ import edu.uce.ec.matriculacion.dto.DtoMateriaCuposDisponibles;
 import edu.uce.ec.matriculacion.dto.DtoMatriculaConsulta;
 import edu.uce.ec.matriculacion.dto.DtoMatriculaRespuesta;
 import edu.uce.ec.matriculacion.entidad.Matricula;
-import edu.uce.ec.matriculacion.proxy.ComprobanteProxy;
 import edu.uce.ec.matriculacion.proxy.MateriaProxy;
 import edu.uce.ec.matriculacion.repositorio.MatriculaRepositorio;
 import org.springframework.stereotype.Service;
@@ -19,13 +18,13 @@ public class MatriculacionServicio {
 
     private final MatriculaRepositorio matriculaRepositorio;
     private final MateriaProxy materiaProxy;
-    private final ComprobanteProxy comprobanteProxy;
+    private final ComprobanteAsyncServicio comprobanteAsyncServicio;
 
     public MatriculacionServicio(MatriculaRepositorio matriculaRepositorio,
-                                 MateriaProxy materiaProxy,ComprobanteProxy comprobanteProxy) {
+                                 MateriaProxy materiaProxy,ComprobanteAsyncServicio comprobanteAsyncServicio) {
         this.matriculaRepositorio = matriculaRepositorio;
         this.materiaProxy = materiaProxy;
-        this.comprobanteProxy= comprobanteProxy;
+        this.comprobanteAsyncServicio= comprobanteAsyncServicio;
     }
 
     public DtoMatriculaRespuesta registrarMatricula(DtoMatriculaConsulta dto) {
@@ -56,7 +55,7 @@ public class MatriculacionServicio {
         dtoComprobante.setTipoComprobante("MATRICULA");
         dtoComprobante.setMateria(materia.getNombre());
         dtoComprobante.setCodigoMateria(materia.getCodigo());
-        comprobanteProxy.generarComprobante(dtoComprobante);
+        comprobanteAsyncServicio.generarComprobanteAsync(dtoComprobante);
         return convertirARespuesta(matriculaGuardada);
     }
 
