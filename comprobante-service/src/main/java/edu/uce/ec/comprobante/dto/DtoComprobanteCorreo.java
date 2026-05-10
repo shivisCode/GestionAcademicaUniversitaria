@@ -11,7 +11,9 @@ public class DtoComprobanteCorreo {
 
     private String nombreEstudiante;
 
-    private String materia;
+    private String Materia;
+
+    private String codigoMateria;
 
     private String codigoComprobante;
 

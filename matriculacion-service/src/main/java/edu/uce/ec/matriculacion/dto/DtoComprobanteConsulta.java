@@ -1,4 +1,4 @@
-package edu.uce.ec.comprobante.dto;
+package edu.uce.ec.matriculacion.dto;
 
 import lombok.Data;
 

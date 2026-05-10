@@ -1,9 +1,11 @@
 package edu.uce.ec.matriculacion.servicio;
 
+import edu.uce.ec.matriculacion.dto.DtoComprobanteConsulta;
 import edu.uce.ec.matriculacion.dto.DtoMateriaCuposDisponibles;
 import edu.uce.ec.matriculacion.dto.DtoMatriculaConsulta;
 import edu.uce.ec.matriculacion.dto.DtoMatriculaRespuesta;
 import edu.uce.ec.matriculacion.entidad.Matricula;
+import edu.uce.ec.matriculacion.proxy.ComprobanteProxy;
 import edu.uce.ec.matriculacion.proxy.MateriaProxy;
 import edu.uce.ec.matriculacion.repositorio.MatriculaRepositorio;
 import org.springframework.stereotype.Service;
@@ -17,15 +19,17 @@ public class MatriculacionServicio {
 
     private final MatriculaRepositorio matriculaRepositorio;
     private final MateriaProxy materiaProxy;
+    private final ComprobanteProxy comprobanteProxy;
 
     public MatriculacionServicio(MatriculaRepositorio matriculaRepositorio,
-                                 MateriaProxy materiaProxy) {
+                                 MateriaProxy materiaProxy,ComprobanteProxy comprobanteProxy) {
         this.matriculaRepositorio = matriculaRepositorio;
         this.materiaProxy = materiaProxy;
+        this.comprobanteProxy= comprobanteProxy;
     }
 
     public DtoMatriculaRespuesta registrarMatricula(DtoMatriculaConsulta dto) {
-
+        DtoComprobanteConsulta dtoComprobante = new DtoComprobanteConsulta();
         DtoMateriaCuposDisponibles materia = materiaProxy.obtenerMateria(dto.getMateriaId());
 
         if (materia == null) {
@@ -44,6 +48,15 @@ public class MatriculacionServicio {
 
         Matricula matriculaGuardada = matriculaRepositorio.save(matricula);
         materiaProxy.descontarCupo(dto.getMateriaId());
+        
+        //Armamos la estructura del comprobante
+        dtoComprobante.setMatriculaId(matriculaGuardada.getId());
+        dtoComprobante.setEstudianteId(matriculaGuardada.getEstudianteId());
+        dtoComprobante.setMateriaId(matriculaGuardada.getMateriaId());
+        dtoComprobante.setTipoComprobante("MATRICULA");
+        dtoComprobante.setMateria(materia.getNombre());
+        dtoComprobante.setCodigoMateria(materia.getCodigo());
+        comprobanteProxy.generarComprobante(dtoComprobante);
         return convertirARespuesta(matriculaGuardada);
     }
 

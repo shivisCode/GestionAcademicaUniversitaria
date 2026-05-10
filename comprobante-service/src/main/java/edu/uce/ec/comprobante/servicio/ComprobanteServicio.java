@@ -60,20 +60,22 @@ public class ComprobanteServicio {
         Comprobante comprobanteGuardado =
                 comprobanteRepositorio.save(comprobante);
 
+        DtoEstudianteRespuesta estudiante = estudianteProxy.obtenerEstudiante(dto.getEstudianteId());
+
         DtoComprobanteCorreo comprobanteCorreo = new DtoComprobanteCorreo();
         comprobanteCorreo.setCodigoComprobante(codigo);
         comprobanteCorreo.setMatriculaId(comprobante.getMateriaId());
-        comprobanteCorreo.setNombreEstudiante(dto.getNombreEstudiante());
+        comprobanteCorreo.setNombreEstudiante(estudiante.getNombre());
         comprobanteCorreo.setEstado(comprobante.getEstado());
         comprobanteCorreo.setFechaEmision(comprobante.getFechaEmision());
         comprobanteCorreo.setMateria(dto.getMateria());
+        comprobanteCorreo.setCodigoMateria(dto.getCodigoMateria());
         comprobanteCorreo.setTipoComprobante("MATRICULA");
         // Generar PDF
         String rutaPdf =
                 pdfGenerador.generarPdf(comprobanteCorreo);
         
-        DtoEstudianteRespuesta estudiante = estudianteProxy.obtenerEstudiante(dto.getEstudianteId());
-        System.out.println(estudiante.getCorreo());
+
         // Enviar correo
         emailServicio.enviarComprobante(
                 estudiante.getCorreo(),
