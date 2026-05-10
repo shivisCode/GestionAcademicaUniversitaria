@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-init-script
+
+data:
+  init.sql: |
+    CREATE DATABASE estudiante_db;
+    CREATE DATABASE materia_db;
+    CREATE DATABASE matriculacion_db;
+    CREATE DATABASE comprobante_db;

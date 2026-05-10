@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comprobante-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: comprobante-service
+  template:
+    metadata:
+      labels:
+        app: comprobante-service
+    spec:
+      containers:
+        - name: comprobante-service
+          image: TU_USUARIO/comprobante-service:latest
+          ports:
+            - containerPort: 8084
+          env:
+            - name: SERVER_PORT
+              value: "8084"
+            - name: DB_URL
+              value: "jdbc:postgresql://postgres-service:5432/comprobante_db"
+            - name: DB_USERNAME
+              value: "admin"
+            - name: DB_PASSWORD
+              value: "admin123"
+            - name: MAIL_HOST
+              value: "smtp.gmail.com"
+            - name: MAIL_PORT
+              value: "587"
+            - name: MAIL_USERNAME
+              value: "elvismiguelherrera.6686@gmail.com"
+            - name: MAIL_PASSWORD
+              value: "wbqrmuazksdvjsaa"
+            - name: ESTUDIANTE_SERVICE_URL
+              value: "http://estudiante-service:8081"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: comprobante-service
+spec:
+  type: LoadBalancer
+  selector:
+    app: comprobante-service
+  ports:
+    - port: 8084
+      targetPort: 8084
