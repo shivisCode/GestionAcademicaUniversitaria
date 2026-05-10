@@ -12,7 +12,7 @@ public class ComprobanteProxy {
 
     private final RestTemplate restTemplate;
 
-    @Value("${comprobante.service.url}")
+    @Value("${service.comprobante.url}")
     private String comprobanteServiceUrl;
 
     public ComprobanteProxy() {
