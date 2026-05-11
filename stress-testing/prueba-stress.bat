@@ -45,9 +45,9 @@ goto menu
 
 :matriculacion
 echo =========================================
-echo Ejecutando stress matriculacion-service
+echo Ejecutando stress matricula-service
 echo =========================================
-k6 run stress-test-matriculacion.js
+k6 run stress-test-matricula.js
 pause
 goto menu
 
@@ -66,7 +66,7 @@ echo =========================================
 
 start cmd /k "k6 run stress-test-estudiante.js"
 start cmd /k "k6 run stress-test-materia.js"
-start cmd /k "k6 run stress-test-matriculacion.js"
+start cmd /k "k6 run stress-test-matricula.js"
 start cmd /k "k6 run stress-test-comprobante.js"
 
 pause
