@@ -2,26 +2,44 @@ import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, r2_score
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.pipeline import Pipeline
 
-# Dataset simulado de carga del sistema
-data = {
-    "usuarios_concurrentes": [50, 100, 150, 200, 300, 400, 500, 700, 900, 1200],
-    "cpu_promedio": [20, 35, 45, 55, 65, 75, 82, 88, 93, 97],
-    "tiempo_respuesta_ms": [120, 180, 250, 330, 450, 620, 800, 1100, 1500, 2100],
-    "replicas_recomendadas": [1, 1, 2, 2, 3, 4, 4, 5, 6, 8]
-}
+# Leer dataset desde archivo CSV
+df = pd.read_csv("dataset.csv")
 
-df = pd.DataFrame(data)
+X = df[[
+    "servicio",
+    "usuarios_concurrentes",
+    "cpu_promedio",
+    "tiempo_respuesta_ms"
+]]
 
-X = df[["usuarios_concurrentes", "cpu_promedio", "tiempo_respuesta_ms"]]
 y = df["replicas_recomendadas"]
 
-X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=42
+# Transformar variable categórica servicio
+preprocesador = ColumnTransformer(
+    transformers=[
+        ("servicio_encoder", OneHotEncoder(handle_unknown="ignore"), ["servicio"])
+    ],
+    remainder="passthrough"
 )
 
-modelo = RandomForestRegressor(
-    n_estimators=100,
+modelo = Pipeline(
+    steps=[
+        ("preprocesador", preprocesador),
+        ("regresor", RandomForestRegressor(
+            n_estimators=100,
+            random_state=42
+        ))
+    ]
+)
+
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.3,
     random_state=42
 )
 
@@ -39,9 +57,14 @@ print(f"R2 Score: {r2:.2f}")
 
 # Escenarios de prueba
 escenarios = pd.DataFrame({
-    "usuarios_concurrentes": [250, 600, 1000],
-    "cpu_promedio": [60, 85, 95],
-    "tiempo_respuesta_ms": [400, 950, 1700]
+    "servicio": [
+        "matriculacion-service",
+        "estudiante-service",
+        "comprobante-service"
+    ],
+    "usuarios_concurrentes": [250, 600, 100],
+    "cpu_promedio": [130, 180, 60],
+    "tiempo_respuesta_ms": [1100, 2200, 500]
 })
 
 resultado = modelo.predict(escenarios)
@@ -49,12 +72,12 @@ resultado = modelo.predict(escenarios)
 print("\nPredicción de réplicas")
 print("----------------------")
 
-servicio = "matriculacion-service"
-
 for i, replicas in enumerate(resultado):
     replicas_optimas = round(replicas)
+    servicio = escenarios.iloc[i]["servicio"]
 
     print(f"\nEscenario {i + 1}")
+    print(f"Servicio: {servicio}")
     print(f"Réplicas óptimas sugeridas: {replicas_optimas}")
-    print(f"Comando sugerido:")
+    print("Comando sugerido:")
     print(f"kubectl scale deployment {servicio} --replicas={replicas_optimas}")
