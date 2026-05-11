@@ -15,6 +15,7 @@ spec:
       containers:
         - name: matriculacion-service
           image: emherrerat/matriculacion-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8083
           env:
@@ -30,6 +31,13 @@ spec:
               value: "http://materia-service:8082"
             - name: COMPROBANTE_SERVICE_URL
               value: "http://comprobante-service:8084"
+          resources:
+            requests:
+              cpu: "300m"
+              memory: "512Mi"
+            limits:
+              cpu: "800m"
+              memory: "1Gi"
 ---
 apiVersion: v1
 kind: Service

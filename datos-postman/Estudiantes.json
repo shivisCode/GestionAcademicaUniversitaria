@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "nombre": "Elvis Herrera",
+        "cedula": "1723456789",
+        "carrera": "Ingeniería en Sistemas",
+        "correo": "emherrerat@uce.edu.ec",
+        "estado": true
+    },
+    {
+        "id": 3,
+        "nombre": "Miguel Herrera",
+        "cedula": "1723456734",
+        "carrera": "Ingeniería en Sistemas",
+        "correo": "emherrera@uce.edu.ec",
+        "estado": true
+    },
+    {
+        "id": 4,
+        "nombre": "Belén Zapata",
+        "cedula": "1734456734",
+        "carrera": "Ingeniería en Sistemas",
+        "correo": "elvisherrera.66@hotmail.es",
+        "estado": true
+    },
+    {
+        "id": 5,
+        "nombre": "Vanessa Guañuna",
+        "cedula": "1734456754",
+        "carrera": "Ingeniería en Sistemas",
+        "correo": "elvisherrera.66@hotmail.com",
+        "estado": true
+    },
+    {
+        "id": 6,
+        "nombre": "Camila Vinueza",
+        "cedula": "0934546754",
+        "carrera": "Ingeniería en Sistemas",
+        "correo": "camvin.66@pattito.com",
+        "estado": true
+    }
+]

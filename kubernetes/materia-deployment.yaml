@@ -15,6 +15,7 @@ spec:
       containers:
         - name: materia-service
           image: emherrerat/materia-service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8082
           env:

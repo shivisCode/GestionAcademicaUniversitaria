@@ -1,0 +1,110 @@
+[
+    {
+        "id": 1,
+        "nombre": "Programación Distribuida",
+        "codigo": "PD-P1",
+        "creditos": 10,
+        "cupoTotal": 23,
+        "cupoDisponible": 22,
+        "estado": true
+    },
+    {
+        "id": 2,
+        "nombre": "Programación Distribuida",
+        "codigo": "PD-P2",
+        "creditos": 10,
+        "cupoTotal": 20,
+        "cupoDisponible": 20,
+        "estado": true
+    },
+    {
+        "id": 3,
+        "nombre": "Control y Calidad de Software",
+        "codigo": "CC-P2",
+        "creditos": 10,
+        "cupoTotal": 17,
+        "cupoDisponible": 17,
+        "estado": true
+    },
+    {
+        "id": 4,
+        "nombre": "Control y Calidad de Software",
+        "codigo": "CC-P1",
+        "creditos": 10,
+        "cupoTotal": 20,
+        "cupoDisponible": 20,
+        "estado": true
+    },
+    {
+        "id": 5,
+        "nombre": "Infraestructura de TI",
+        "codigo": "IT-P1",
+        "creditos": 10,
+        "cupoTotal": 20,
+        "cupoDisponible": 20,
+        "estado": true
+    },
+    {
+        "id": 6,
+        "nombre": "Infraestructura de TI",
+        "codigo": "IT-P2",
+        "creditos": 10,
+        "cupoTotal": 20,
+        "cupoDisponible": 20,
+        "estado": true
+    },
+    {
+        "id": 7,
+        "nombre": "Inteligencia de Negocios",
+        "codigo": "IN-P2",
+        "creditos": 10,
+        "cupoTotal": 30,
+        "cupoDisponible": 30,
+        "estado": true
+    },
+    {
+        "id": 8,
+        "nombre": "Inteligencia de Negocios",
+        "codigo": "IN-P1",
+        "creditos": 10,
+        "cupoTotal": 30,
+        "cupoDisponible": 30,
+        "estado": true
+    },
+    {
+        "id": 9,
+        "nombre": "Minería de Datos",
+        "codigo": "MN-P1",
+        "creditos": 10,
+        "cupoTotal": 31,
+        "cupoDisponible": 31,
+        "estado": true
+    },
+    {
+        "id": 10,
+        "nombre": "Minería de Datos",
+        "codigo": "MN-P2",
+        "creditos": 10,
+        "cupoTotal": 31,
+        "cupoDisponible": 31,
+        "estado": true
+    },
+    {
+        "id": 11,
+        "nombre": "Auditoría de TI",
+        "codigo": "AT-P2",
+        "creditos": 10,
+        "cupoTotal": 26,
+        "cupoDisponible": 26,
+        "estado": true
+    },
+    {
+        "id": 12,
+        "nombre": "Auditoría de TI",
+        "codigo": "AT-P1",
+        "creditos": 10,
+        "cupoTotal": 26,
+        "cupoDisponible": 26,
+        "estado": true
+    }
+]
