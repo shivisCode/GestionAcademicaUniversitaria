@@ -9,19 +9,25 @@ from sklearn.pipeline import Pipeline
 # Leer dataset desde archivo CSV
 df = pd.read_csv("dataset.csv")
 
-X = df[[
-    "servicio",
-    "usuarios_concurrentes",
-    "cpu_promedio",
-    "tiempo_respuesta_ms"
-]]
+X = df[
+    [
+        "servicio",
+        "usuarios_concurrentes",
+        "cpu_promedio",
+        "tiempo_respuesta_ms"
+    ]
+]
 
 y = df["replicas_recomendadas"]
 
 # Transformar variable categórica servicio
 preprocesador = ColumnTransformer(
     transformers=[
-        ("servicio_encoder", OneHotEncoder(handle_unknown="ignore"), ["servicio"])
+        (
+            "servicio_encoder",
+            OneHotEncoder(handle_unknown="ignore"),
+            ["servicio"]
+        )
     ],
     remainder="passthrough"
 )
@@ -29,10 +35,13 @@ preprocesador = ColumnTransformer(
 modelo = Pipeline(
     steps=[
         ("preprocesador", preprocesador),
-        ("regresor", RandomForestRegressor(
-            n_estimators=100,
-            random_state=42
-        ))
+        (
+            "regresor",
+            RandomForestRegressor(
+                n_estimators=100,
+                random_state=42
+            )
+        )
     ]
 )
 
@@ -59,12 +68,13 @@ print(f"R2 Score: {r2:.2f}")
 escenarios = pd.DataFrame({
     "servicio": [
         "matriculacion-service",
+        "materia-service",
         "estudiante-service",
         "comprobante-service"
     ],
-    "usuarios_concurrentes": [250, 600, 100],
-    "cpu_promedio": [130, 180, 60],
-    "tiempo_respuesta_ms": [1100, 2200, 500]
+    "usuarios_concurrentes": [250, 600, 100, 180],
+    "cpu_promedio": [130, 180, 60, 95],
+    "tiempo_respuesta_ms": [1100, 2200, 500, 900]
 })
 
 resultado = modelo.predict(escenarios)
@@ -78,6 +88,9 @@ for i, replicas in enumerate(resultado):
 
     print(f"\nEscenario {i + 1}")
     print(f"Servicio: {servicio}")
+    print(f"Usuarios concurrentes: {escenarios.iloc[i]['usuarios_concurrentes']}")
+    print(f"CPU promedio: {escenarios.iloc[i]['cpu_promedio']}%")
+    print(f"Tiempo respuesta: {escenarios.iloc[i]['tiempo_respuesta_ms']} ms")
     print(f"Réplicas óptimas sugeridas: {replicas_optimas}")
     print("Comando sugerido:")
     print(f"kubectl scale deployment {servicio} --replicas={replicas_optimas}")
