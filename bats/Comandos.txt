@@ -1,3 +1,40 @@
+
+Fase 1: Análisis y modelado
+- Identificación de módulos funcionales.
+- Separación de componentes en microservicios.
+- Diseño arquitectónico basado en contenedores.
+
+Fase 2: Contenerización
+- Desarrollo de APIs REST con Spring Boot.
+- Creación de Dockerfile.
+- Generación y publicación de imágenes Docker.
+
+Fase 3: Orquestación
+- Instalación de Minikube.
+- Configuración de Kubernetes.
+- Implementación de Deployment y LoadBalancer.
+- Configuración de HPA.
+- Pruebas de estrés.
+
+Fase 4: Integración de IA
+- Desarrollo de modelo predictivo con Scikit-learn.
+- Evaluación de comportamiento bajo carga.
+
+Minikube instalación (Modo Desarrollador-Powersell):
+
+minikube start --driver=docker
+Cuando finalice, aparecerá algo asi:
+Done! kubectl is now configured to use "minikube" cluster
+----------------------------------------------------------------
+Verificamos
+kubectl get nodes
+----------------------------------------------------------------
+Habilitamos Metric Server
+minikube addons enable metrics-server
+----------------------------------------------------------------
+Verificamos
+kubectl get pods -n kube-system
+----------------------------------------------------------------
 verificamos si esta corriendo alguna otra app
 netstat -ano | findstr :8081
 matamos el proceso 
